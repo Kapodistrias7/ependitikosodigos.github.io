@@ -1,125 +1,612 @@
 <!DOCTYPE html>
-<html lang="el">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Επένδυσε Έξυπνα</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn Greek with Confidence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: rgba(255, 255, 255, 0.85);
+      --primary: #0d5c9b;
+      --primary-dark: #0a3d69;
+      --accent: #f9b84a;
+      --text: #1e2a37;
+      --muted: #667085;
+      --border: rgba(15, 31, 52, 0.08);
+      --shadow: 0 18px 40px rgba(13, 51, 80, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(13, 92, 155, 0.12), transparent 28%),
+        linear-gradient(135deg, #eef6ff 0%, #f9fbff 100%);
+      color: var(--text);
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page-shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 64px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 8px 10px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary), #5aa7f1);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+      box-shadow: 0 10px 20px rgba(13, 92, 155, 0.2);
+    }
+
+    .nav-button,
+    .primary-button,
+    .secondary-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      border-radius: 999px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .nav-button,
+    .primary-button {
+      background: linear-gradient(135deg, var(--primary), #1d79c5);
+      color: white;
+      box-shadow: 0 14px 30px rgba(13, 92, 155, 0.25);
+    }
+
+    .nav-button:hover,
+    .primary-button:hover,
+    .secondary-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .nav-button {
+      padding: 0.8rem 1.1rem;
+      font-size: 0.92rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+      padding: 40px 0 24px;
+    }
+
+    .hero-copy {
+      padding: 12px 0;
+    }
+
+    .eyebrow {
+      color: var(--primary);
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      line-height: 1.04;
+      letter-spacing: -0.06em;
+      margin-bottom: 18px;
+      color: var(--primary-dark);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.75;
+      max-width: 620px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .primary-button {
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+    }
+
+    .secondary-button {
+      padding: 1rem 1.5rem;
+      color: var(--primary-dark);
+      background: rgba(13, 92, 155, 0.08);
+      border: 1px solid rgba(13, 92, 155, 0.14);
+    }
+
+    .mini-stats {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .mini-stats li {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px 16px;
+      box-shadow: 0 10px 24px rgba(27, 41, 53, 0.04);
+    }
+
+    .mini-stats strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.02rem;
+      color: var(--primary-dark);
+    }
+
+    .mini-stats span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .hero-visual {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 500px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(17, 27, 45, 0.06);
+      border-radius: 26px;
+      backdrop-filter: blur(8px);
+      box-shadow: var(--shadow);
+    }
+
+    .card-main {
+      width: min(100%, 430px);
+      padding: 24px 22px 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .flag {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      height: 108px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .flag .blue {
+      background: #0d5c9b;
+    }
+
+    .flag .white {
+      background: #f4f7fb;
+    }
+
+    .card-content .label {
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .card-content h3 {
+      color: var(--primary-dark);
+      font-size: 1.7rem;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .progress {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(13, 92, 155, 0.08);
+      overflow: hidden;
+    }
+
+    .progress-bar span {
+      display: block;
+      width: 78%;
+      height: 100%;
+      background: linear-gradient(90deg, #1c7dd4, #f6bf67);
+      border-radius: inherit;
+    }
+
+    .floating-card {
+      position: absolute;
+      right: 18px;
+      bottom: 24px;
+      width: min(82%, 270px);
+      padding: 18px 20px;
+      transform: rotate(7deg);
+      z-index: 3;
+      background: linear-gradient(135deg, #ffffff, #eef6ff);
+    }
+
+    .floating-card p {
+      color: var(--primary-dark);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
+    .benefits,
+    .journey {
+      margin-top: 64px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--primary-dark);
+      line-height: 1.15;
+      letter-spacing: -0.05em;
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .benefit-item {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 24px 20px;
+      box-shadow: 0 12px 24px rgba(14, 35, 54, 0.04);
+    }
+
+    .icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      font-size: 1.8rem;
+      background: rgba(13, 92, 155, 0.1);
+      border-radius: 16px;
+      margin-bottom: 16px;
+    }
+
+    .benefit-item h3 {
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .benefit-item p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .journey {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .journey-copy h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: var(--primary-dark);
+      line-height: 1.1;
+      letter-spacing: -0.05em;
+      margin-bottom: 16px;
+    }
+
+    .journey-copy p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    .journey-points {
+      display: grid;
+      gap: 16px;
+    }
+
+    .point {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px 18px;
+    }
+
+    .point span {
+      min-width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #e8f2ff, #cbe6ff);
+      color: var(--primary-dark);
+      border-radius: 12px;
+      font-weight: 800;
+    }
+
+    .point p {
+      color: var(--text);
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .final-cta {
+      margin-top: 64px;
+      background: linear-gradient(135deg, rgba(13, 92, 155, 0.96), rgba(18, 118, 190, 0.9));
+      color: white;
+      border-radius: 28px;
+      padding: 40px 24px;
+      text-align: center;
+      box-shadow: 0 18px 38px rgba(13, 92, 155, 0.22);
+    }
+
+    .final-cta h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+
+    .final-cta p {
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.7;
+      max-width: 700px;
+      margin: 0 auto 24px;
+    }
+
+    .large {
+      padding: 1.1rem 1.8rem;
+      font-size: 1.02rem;
+    }
+
+    @media (max-width: 768px) {
+      .page-shell {
+        width: min(100% - 20px, 1180px);
+      }
+
+      .topbar {
+        padding-top: 8px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding-top: 20px;
+      }
+
+      .mini-stats,
+      .benefit-grid,
+      .journey {
+        grid-template-columns: 1fr;
+      }
+
+      .benefit-grid,
+      .journey {
+        display: grid;
+      }
+
+      .mini-stats {
+        gap: 10px;
+      }
+
+      .card-main {
+        width: 100%;
+      }
+
+      .floating-card {
+        position: static;
+        transform: none;
+        width: 100%;
+        margin-top: 16px;
+      }
+
+      .hero-visual {
+        min-height: auto;
+      }
+
+      .final-cta {
+        padding: 28px 18px;
+      }
+
+      .cta-row {
+        flex-direction: column;
+      }
+
+      .primary-button,
+      .secondary-button,
+      .nav-button {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="left-column">
-            <div class="message">
-                <p>Οι ορθές επενδύσεις χρειάζονται καθοδήγηση. Σταμάτα να πληρώνεις υπέρογκες χρεώσεις στις χρηματιστηριακές. Κάνε σήμερα την εγγραφή σου και μάθε πως να επενδύεις σωστά!</p>
-            </div>
-        </div>
-        <div class="right-column">
-            <div class="signup-form">
-                <h2 class="form-title">Εγγραφή</h2>
-                <form id="signup-form" action="https://formsubmit.co/fstr640@gmail.com" method="POST" novalidate>
-                    <!-- Honeypot to prevent spam -->
-                    <input type="text" name="_honey" style="display:none">
-                    
-                    <!-- Disable captcha -->
-                    <input type="hidden" name="_captcha" value="false">
-                    
-                    <!-- Redirect after submission -->
-                    <input type="hidden" name="_next" value="https://formsubmit.co/thanks">
-                    
-                    <!-- Exclude fields from formSubmit -->
-                    <input type="hidden" name="_template" value="table">
-                    
-                    <div class="form-group">
-                        <label for="name">Ονοματεπώνυμο</label>
-                        <input type="text" id="name" name="name" required>
-                        <div class="error-message" id="name-error">Παρακαλώ συμπληρώστε το ονοματεπώνυμό σας</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
-                        <div class="error-message" id="email-error">Παρακαλώ εισάγετε ένα έγκυρο email</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Τηλέφωνο</label>
-                        <input type="tel" id="phone" name="phone" placeholder="+30 XXXXXXXXXX" pattern="(\+30)?\s*[2-6,9]{1}[0-9]{9}">
-                        <div class="error-message" id="phone-error">Παρακαλώ εισάγετε έναν έγκυρο αριθμό τηλεφώνου (π.χ. +30 6912345678)</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Κωδικός</label>
-                        <!-- Changed name to _password so it's not sent to FormSubmit -->
-                        <input type="password" id="password" name="_password" required minlength="8">
-                        <div class="error-message" id="password-error">Ο κωδικός πρέπει να έχει τουλάχιστον 8 χαρακτήρες</div>
-                    </div>
-                    
-                    <!-- Hidden field to indicate password was provided without sending actual password -->
-                    <input type="hidden" name="password_provided" value="yes">
-                    
-                    <button type="submit">Εγγραφή</button>
-                    <div class="terms">
-                        Με την εγγραφή σας, αποδέχεστε τους <a href="#">Όρους Χρήσης</a> και την <a href="#">Πολιτική Απορρήτου</a>.
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">Γ</span>
+        <span>GreekFlow</span>
+      </div>
+      <a href="https://www.italki.com/en/teacher/32356379?lv=1" class="nav-button" target="_blank" rel="noreferrer">
+        Start Learning
+      </a>
+    </header>
 
-    <script>
-        // Show validation errors on input
-        const inputs = document.querySelectorAll('input');
-        inputs.forEach(input => {
-            input.addEventListener('input', function() {
-                validateInput(this);
-            });
-            
-            input.addEventListener('blur', function() {
-                validateInput(this);
-            });
-        });
-        
-        // Validate individual input
-        function validateInput(input) {
-            const errorElement = document.getElementById(`${input.id}-error`);
-            if (!errorElement) return; // Skip hidden inputs
-            
-            if (!input.checkValidity()) {
-                errorElement.style.display = 'block';
-                input.classList.add('invalid');
-            } else {
-                errorElement.style.display = 'none';
-                input.classList.remove('invalid');
-            }
-        }
-        
-        // Handle form submission
-        document.getElementById('signup-form').addEventListener('submit', function(e) {
-            let isValid = true;
-            
-            // Validate all inputs including password
-            inputs.forEach(input => {
-                // Skip validation for hidden/system fields
-                if (input.type === 'hidden' || input.name.startsWith('_')) {
-                    return;
-                }
-                
-                // Special handling for password which has _password name but id=password
-                if (input.id === 'password') {
-                    if (!input.checkValidity()) {
-                        isValid = false;
-                        validateInput(input);
-                    }
-                    return;
-                }
-                
-                if (!input.checkValidity()) {
-                    isValid = false;
-                    validateInput(input);
-                }
-            });
-            
-            if (!isValid) {
-                e.preventDefault(); // Prevent form submission if validation fails
-            }
-        });
-    </script>
+    <main class="hero">
+      <section class="hero-copy">
+        <p class="eyebrow">For expats, travelers, and beginners</p>
+        <h1>Learn Greek without feeling lost.</h1>
+        <p class="subtitle">
+          Speaking Greek shouldn’t feel intimidating. Build real confidence with practical lessons designed for everyday life, travel, work, and communication.
+        </p>
+
+        <div class="cta-row">
+          <a href="https://www.italki.com/en/teacher/32356379?lv=1" class="primary-button" target="_blank" rel="noreferrer">
+            Book a lesson
+          </a>
+          <a href="#benefits" class="secondary-button">Why it works</a>
+        </div>
+
+        <ul class="mini-stats">
+          <li><strong>Beginner friendly</strong><span>Step-by-step support</span></li>
+          <li><strong>Real speaking practice</strong><span>Daily conversation skills</span></li>
+          <li><strong>Flexible learning</strong><span>Fit your schedule</span></li>
+        </ul>
+      </section>
+
+      <section class="hero-visual" aria-label="Greek learning illustration">
+        <div class="card card-main">
+          <div class="flag">
+            <span class="blue"></span>
+            <span class="white"></span>
+          </div>
+          <div class="card-content">
+            <p class="label">Daily progress</p>
+            <h3>Greek, one conversation at a time.</h3>
+            <div class="progress">
+              <span>Speaking confidence</span>
+              <strong>78%</strong>
+            </div>
+            <div class="progress-bar">
+              <span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card floating-card">
+          <p>“I finally know how to order food, ask for directions, and speak in real-life situations.”</p>
+        </div>
+      </section>
+    </main>
+
+    <section id="benefits" class="benefits">
+      <div class="section-heading">
+        <p class="eyebrow">Why learners stay motivated</p>
+        <h2>Greek learning that actually matches real life</h2>
+      </div>
+
+      <div class="benefit-grid">
+        <article class="benefit-item">
+          <div class="icon">💬</div>
+          <h3>Speak from day one</h3>
+          <p>Learn useful phrases for daily conversations, not just textbook grammar.</p>
+        </article>
+
+        <article class="benefit-item">
+          <div class="icon">🎧</div>
+          <h3>Understand naturally</h3>
+          <p>Practice pronunciation and listening in a way that feels natural and confidence-building.</p>
+        </article>
+
+        <article class="benefit-item">
+          <div class="icon">📍</div>
+          <h3>Use it in real situations</h3>
+          <p>From cafés and shops to work and travel, every lesson helps you communicate faster.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="journey">
+      <div class="journey-copy">
+        <p class="eyebrow">A better way to learn</p>
+        <h2>Support for foreigners who want to feel at home in Greece</h2>
+        <p>
+          Whether you are moving for work, studying, or simply falling in love with the language, the right guidance can make all the difference.
+        </p>
+      </div>
+
+      <div class="journey-points">
+        <div class="point">
+          <span>01</span>
+          <p>Clear explanations that are easy to follow</p>
+        </div>
+        <div class="point">
+          <span>02</span>
+          <p>Personalized lessons based on your goals</p>
+        </div>
+        <div class="point">
+          <span>03</span>
+          <p>Confidence-building practice in everyday Greek</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <h2>Ready to start speaking Greek with confidence?</h2>
+      <p>Learn in a way that feels practical, encouraging, and designed for life abroad.</p>
+      <a href="https://www.italki.com/en/teacher/32356379?lv=1" class="primary-button large" target="_blank" rel="noreferrer">
+        Book your first lesson
+      </a>
+    </section>
+  </div>
 </body>
 </html>
